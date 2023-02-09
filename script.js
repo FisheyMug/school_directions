@@ -59,11 +59,13 @@ function drawFrame (frameX, frameY, canvasX, canvasY) {
     ctx.drawImage(img, frameX * width, frameY*height, width, height, canvasX, canvasY, scaledWidth, scaledHeight);
 }
 
-//event listeners for buttons and keys
+//event listeners for buttons and keys and variables needed to use them;
 const straightBtn = document.querySelector('#straight');
 const rightBtn = document.querySelector('#right');
 const leftBtn = document.querySelector('#left');
 const sentanceBox = document.getElementById("sentance")
+
+//sentanceBox.innerHTML = "This is my favorite place! <br>" + "The " + favouritePlace;
 
 straightBtn.addEventListener("click", () => {
     move(straight)});
