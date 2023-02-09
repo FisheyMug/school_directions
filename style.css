@@ -36,6 +36,20 @@ button {
     box-shadow: 2.5px 5px #888888;
 }
 
+#left {
+    width: 50%;
+}
+
+#right {
+    width: 50%;
+}
+
+#straight {
+    width: 75%;
+    height: 85%
+
+}
+
 #straightBox {
     display: flex;
     justify-content: center;
