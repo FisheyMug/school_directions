@@ -3,6 +3,7 @@ let ctx = canvas.getContext("2d");
 let img= new Image();
 img.src = "sprite.png"; 
 
+
 // variables for moving
 let spriteX = 533;
 let spriteY = 369;
@@ -108,6 +109,7 @@ const getCursorPosition = (canvas, event) => {
 
   //room hover
 function roomHover(canvas, event) {
+   
     const x = event.offsetX
     const y = event.offsetY
     //top rooms and playground
@@ -143,11 +145,14 @@ function roomHover(canvas, event) {
     const tOfficeOverlapY=(y>=midRoomY2 && y<=botRoomY2)
 
     if (pGOverlapX && pGOverlapY) {
-        canvas.style="cursor: pointer;"   
+        canvas.style="cursor: pointer;"  
+        // ctx.strokeRect(playgroundX1,playgroundY1, 105, 130);
     } else if (gymOverlapX && gymOverlapY) {
         canvas.style="cursor: pointer;"  
+        // ctx.strokeRect(gymX1, topRoomY1, 101, 123)
     } else if (classOverlapX&& classOverlapy) {
-        canvas.style="cursor: pointer;"  
+        canvas.style="cursor: pointer;" 
+        // ctx.strokeRect(gymX2, topRoomY1, 101, 123) 
     } else if (lunchOverlapX&&lunchOverlapY){
         canvas.style="cursor: pointer;" 
     } else if (scienceOverlapX&& scienceOverlapY) {
@@ -171,7 +176,11 @@ function roomHover(canvas, event) {
     } else if (tOfficeOverlapX && tOfficeOverlapY) {
         canvas.style="cursor: pointer;" 
     }
-    else canvas.style="cursor: cursor;" ;
+    else {
+        canvas.style="cursor: cursor;" ;
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        drawFrame(0, faceDirection, spriteX, spriteY)
+    }
 }
 
 
@@ -436,6 +445,8 @@ function move(direction) {
 }
 
 function roomSelect(canvas, event) {
+    ctx.strokeStyle = "yellow"
+    ctx.lineWidth = 10;
     const x = event.offsetX
     const y = event.offsetY
     //top rooms and playground
@@ -471,34 +482,52 @@ function roomSelect(canvas, event) {
     const tOfficeOverlapY=(y>=midRoomY2 && y<=botRoomY2)
 
     if (pGOverlapX && pGOverlapY) {
-       favouritePlace="playground"   
+       favouritePlace="playground"  
+       ctx.strokeRect(playgroundX1,playgroundY1, 105, 130); 
     } else if (gymOverlapX && gymOverlapY) {
         favouritePlace="gym"
+        ctx.strokeRect(gymX1, topRoomY1, 101, 123)
     } else if (classOverlapX&& classOverlapy) {
         favouritePlace="classroom" 
+        ctx.strokeRect(gymX2, topRoomY1, 101, 123) 
     } else if (lunchOverlapX&&lunchOverlapY){
         favouritePlace = "lunch room"
+        ctx.strokeRect(classroomX2, topRoomY1, 101, 123)
     } else if (scienceOverlapX&& scienceOverlapY) {
         favouritePlace="science room"
+        ctx.strokeRect(lunchroomX2, topRoomY1, 101, 123)
     } else if (cookingOverlapX && cookingOverlapY) {
         favouritePlace="cooking room"
+        ctx.strokeRect(scienceX2, topRoomY1, 101, 123)
     } else if (musicOverlapX && musicOverlapY) {
         favouritePlace="music room"
+        ctx.strokeRect(cookingX2, topRoomY1, 101, 123)
     } else if (nurseOverlapX && nurseOverlapY) {
         favouritePlace="school nurse's office"
+        ctx.strokeRect(gymX1, midRoomY1, 101, 123)
     } else if (compOverlapX && compOverlapY) {
         favouritePlace="computer room"
+        ctx.strokeRect(gymX2, midRoomY1, 101, 123)
     } else if (artOverlapX && artOverlapY) {
         favouritePlace="arts and crafts room"
+        ctx.strokeRect(classroomX2, midRoomY1, 101, 123)
     } else if (pOfficeOverlapX && pOfficeOverlapY) {
         favouritePlace="school principal's office"
+        ctx.strokeRect(scienceX2, midRoomY1, 101, 123)
     } else if (libraryOverlapX && libraryOverlapY) {
         favouritePlace="library"
+        ctx.strokeRect(cookingX2, midRoomY1, 101, 123)
     } else if (sOfficeOverlapX && sOfficeOverlapY) {
         favouritePlace="school office"
+        ctx.strokeRect(classroomX2, midRoomY2, 101, 123)
     } else if (tOfficeOverlapX && tOfficeOverlapY) {
         favouritePlace="teachers office"
+        ctx.strokeRect(scienceX2, midRoomY2, 101, 123)
     }
+    setTimeout(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        drawFrame(0, faceDirection, spriteX, spriteY)
+    }, 1000);
 }
 
 function roomDetection(canvas, event) {
